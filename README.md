@@ -1,11 +1,11 @@
 
-# APPLICATION DE GESTION DE TOURNOIS D'ECHEC
+# SITE WEB DE STREAMING DE FILMS
 
 
 ## Avertissements
 
-Cette application s'exécute dans la console et permet de gérer des tournois d'échecs. 
-Son développement respecte le Design Pattern MVC (modèle vue controleur)  
+Cette application Web a pour but d'afficher les films proposés par l'API d'OpenClassrooms sous forme de suggestions basées sur un certains nombres de critères comme le type de film, la popularité, ou la note Imdb.
+Il s'agit d'un projet réalisé dans le cadre de la formation Développeur Python d'Openclassrooms et n'a pas vocation à être utilisée dans un autre contexte. 
 
 ## Mise en place et exécution de l'application
 
@@ -32,13 +32,6 @@ pip install -r requirements.txt
 4. Vous pouvez maintenant exécuter l'application, soit à l'aide de l'IDE de votre choix, soit directement depuis le Terminal, à l'aide de la commande suivante :
 ```		
 python main.py
-```
-5. L'application se compose d'une suite de menu successif, chaque menu indiquant les actions possibles. Les différentes actions s'éxécutent en tapant un caractère dans la console puis la touche Entrée. 
- 
- 
-NB : Pour générer un nouveau rapport flake8 vous confirmant que le code est conforme à la PEP8, utilisez la commande suivante :
-```		
-flake8 --exclude=env --max-line-length=119 --format=html --htmldir=<nom du rapport à générer>
 ```
 
 
