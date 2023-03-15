@@ -13,25 +13,14 @@ Il s'agit d'un projet réalisé dans le cadre de la formation Développeur Pytho
 ```
 git clone <URL du repo>
 ```
-2. Créez un environnement virtuel Python en exécutant la commande suivantes dans le Terminal de votre choix :
+2. Il vous faut ensuite procéder à l'installation en local de l'API fournie par OpenClassroom si ce n'est pas déjà fait. La démarche est décrite à cette adresse :
 ```
-python -m venv env (env étant le nom de l'environnement, vous pouvez le changer)
+https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR
 ```
-Puis, toujours dans le terminal, activez votre environnement avec la commande suivante si vous êtes sous Linux :
+3. Il faut ensuite lancer un serveur Web pour permettre au site de fonctionner en local. Cela peut se faire en utilisant une extension VSCode comme LiveServer, ou à l'aide de Node.js. Les 2 démarches sont expliquées ici :
 ```
-source env/bin/activate
+https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7910981-preparez-votre-projet#/id/r-8062533
 ```
-Ou bien celle-ci si vous êtes sous Windows
-```
-env/Scripts/activate.bat
-```
-3. Téléchargez les packages Python nécessaires à la bonne exécution du script à l'aide de la commande suivante :
-```
-pip install -r requirements.txt
-```
-4. Vous pouvez maintenant exécuter l'application, soit à l'aide de l'IDE de votre choix, soit directement depuis le Terminal, à l'aide de la commande suivante :
-```		
-python main.py
-```
+4. Vous pouvez maintenant faire fonctionner le site en local sur votre machine.
 
 
