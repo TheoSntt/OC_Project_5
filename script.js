@@ -236,25 +236,30 @@ recupererSuperFilms("Comedy")
 recupererSuperFilms("Sci-Fi")
 
 
-// Tente un truc
-var btnOuf = document.querySelector("#Waow");
-btnOuf.addEventListener("click", function(event) {
-	var scrollArea = document.querySelector("#allez");
-	console.log(scrollArea.scrollLeft);
-	scrollArea.scroll({
-		top: 0,
-		left: scrollArea.scrollLeft + 400,
-		behavior: 'smooth'
-	});
-})
 
-var btnOuf2 = document.querySelector("#Waow2");
-btnOuf2.addEventListener("click", function(event) {
-	var scrollArea = document.querySelector("#allez");
-	console.log(scrollArea.scrollLeft);
-	scrollArea.scroll({
-		top: 0,
-		left: scrollArea.scrollLeft - 400,
-		behavior: 'smooth'
-	});
-})
+// Add listener to left and right scroll buttons for caroussels
+var mesBtn = document.querySelectorAll(".scrollBtn");
+for (let btn of mesBtn){
+	btn.addEventListener("click", function(event) {
+		let btnName = this.id;
+		console.log(btnName);
+		let genre = btnName.split("__")[0];
+		let direction = btnName.split("__")[2].split("_")[0];
+		var scrollArea = document.querySelector("#" + genre + "__caroussel__scroll");
+		if (direction === "right"){
+			scrollArea.scroll({
+				top: 0,
+				left: scrollArea.scrollLeft + 420,
+				behavior: 'smooth'
+			});
+		}
+		else {
+			scrollArea.scroll({
+				top: 0,
+				left: scrollArea.scrollLeft - 420,
+				behavior: 'smooth'
+			});
+		}
+
+	})
+}
