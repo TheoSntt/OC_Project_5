@@ -4,42 +4,73 @@ function addListenerShowDetails(element) {
 		const id = event.target.dataset.id;
 		const reponse = await fetch("http://localhost:8000/api/v1/titles/" + id);
 		const filmInfo = await reponse.json();
-		generateInfoWindow(filmInfo)
+		displayOverlayAndModal(filmInfo)
 	});
 }
 
-function generateInfoWindow(movie) {
+function displayOverlayAndModal(movie) {
+	//Calling the function to populate the modal window with the movie information
+	populateModalWindow(movie);
 	// Displaying the overlay
-	var overlay = document.querySelector(".overlay");
+	let overlay = document.querySelector(".overlay");
 	overlay.style.display = "block";
 	// Event listener to close the overlay
-	overlay.addEventListener("click", function(event) {
-		var overlay = document.querySelector(".overlay");
-		// overlay.innerHTML = "";
-		overlay.style.display = "none";
-	})
+	overlay.addEventListener("click", removeOverlayAndModal)
 }
 
-function generateInfoWindowVrai(movie) {
-	console.log(movie)
-	// Displaying the overlay
-	var overlay = document.querySelector(".overlay");
-	overlay.style.display = "block";
-	// Creating the Window itself
-	var infoWindow = document.createElement("div");
-	infoWindow.className = "infoWindow";
-	// Creation of title, release date, genres, country, and placing them in a grid element
-	var gridTitleElement = document.createElement("div");
-	gridTitleElement.className = ("infoWindow__title")
-	// Title of the movie
-	var title = document.createElement("h3");
+function removeOverlayAndModal() {
+	let overlay = document.querySelector(".overlay");
+	let window = document.querySelector(".infoWindow");
+	//TODO : change to empty all containers within the window and not the window itself
+	window.innerHTML = "<div class='infoWindow__title'><div class='infoWindow__title__line1'></div><div class='infoWindow__title__line2'></div></div><div class='infoWindow__informations'><div class='infoWindow__informations__line1'></div><div class='infoWindow__informations__line2'></div></div><div class='infoWindow__details'><div class='infoWindow__details__leftBlock'></div><div class='infoWindow__details__rightBlock'></div></div>";
+	overlay.style.display = "none";
+}
+
+function populateModalWindow(movie) {
+	// Image
+	let imageElement = document.createElement("img");
+	imageElement.src = movie.image_url;
+	imageElement.className = "infoWindow__img";
+	let window = document.querySelector(".infoWindow");
+	window.appendChild(imageElement);
+	// Title and Date element
+	populateTitleAndDate(movie);
+	// Genre and Country element
+	populateGenreAndCountry(movie);
+	// Scores and Box Office element
+	populateScoresAndBoxoffice(movie);
+	// Director and duration element
+	populateDirectorAndDuration(movie);
+	// Description element
+	populateDescription(movie);
+	// Actors element
+	populateActors(movie);
+}
+
+function populateTitleAndDate(movie) {
+	// Populating the first line with title and Date
+	let titleAndDate = document.querySelector(".infoWindow__title__line1");
+	// Creating the title element
+	let titleElement = document.createElement("h3");
 	if (movie.original_title){
-		title.innerText = movie.original_title;
+		titleElement.innerText = movie.original_title;
 	}
 	else {
-		title.innerText = movie.title;
+		titleElement.innerText = movie.title;
 	}
-	// Genre
+	// Adding it to the grid element to populate
+	titleAndDate.appendChild(titleElement);
+	// Creating the release year element
+	const yearElement = document.createElement("p");
+	yearElement.innerText = movie.year ?? "Date de sortie inconnue.";
+	// Adding it to the grid element to populate
+	titleAndDate.appendChild(yearElement);
+}
+
+function populateGenreAndCountry(movie) {
+	// Populating the first line with title and Date
+	let genreAndCountry = document.querySelector(".infoWindow__title__line2");
+	// Creating the genre element
 	const genreElement = document.createElement("p");
 	let genreStr = "";
 	for (let genre of movie.genres){
@@ -47,10 +78,9 @@ function generateInfoWindowVrai(movie) {
 	}
 	genreStr = genreStr.slice(0,-3)
 	genreElement.innerText = genreStr;
-	// Release Year
-	const yearElement = document.createElement("p");
-	yearElement.innerText = movie.year ?? "Date de sortie inconnue.";
-	// Country
+	// Adding it to the grid element to populate
+	genreAndCountry.appendChild(genreElement);
+	// Creating the release year element
 	const countryElement = document.createElement("p");
 	let countryStr = "";
 	for (let country of movie.countries){
@@ -58,25 +88,29 @@ function generateInfoWindowVrai(movie) {
 	}
 	countryStr = countryStr.slice(0,-3)
 	countryElement.innerText = countryStr;
-	// Adding all four element to the grid element
-	gridTitleElement.appendChild(title);
-	gridTitleElement.appendChild(yearElement);
-	gridTitleElement.appendChild(genreElement);
-	gridTitleElement.appendChild(countryElement);
+	// Adding it to the grid element to populate
+	genreAndCountry.appendChild(countryElement);
+}
 
-
-	
-	// Image
-	const imageElement = document.createElement("img");
-	imageElement.src = movie.image_url;
-	imageElement.className = "infoWindow__img"
-	
+function populateScoresAndBoxoffice(movie) {
+	let scoresandBoxoffice = document.querySelector(".infoWindow__informations__line1");
 	// Rated
 	const ratedElement = document.createElement("p");
 	ratedElement.innerText = movie.rated ?? "Rated non disponible.";
 	// IMDB Score
 	const scoreElement = document.createElement("p");
 	scoreElement.innerText = movie.imdb_score ?? "Score ImDB inconnu.";
+	// Box office results
+	const boxofficeElement = document.createElement("p");
+	boxofficeElement.innerText = movie.worldwide_gross_income + "$"  ?? "Résultats au box office inconnus.";
+	// Adding all three to the grid element to populate
+	scoresandBoxoffice.appendChild(ratedElement);
+	scoresandBoxoffice.appendChild(scoreElement);
+	scoresandBoxoffice.appendChild(boxofficeElement);
+}
+
+function populateDirectorAndDuration(movie) {
+	let directorAndDuration = document.querySelector(".infoWindow__informations__line2");
 	// Director(s)
 	const directorElement = document.createElement("p");
 	let directorStr = "";
@@ -85,6 +119,24 @@ function generateInfoWindowVrai(movie) {
 	}
 	directorStr = directorStr.slice(0,-3)
 	directorElement.innerText = directorStr;
+	// Duration
+	const durationElement = document.createElement("p");
+	durationElement.innerText = movie.duration + " minutes" ?? "Durée inconnue.";
+	// Adding both to the grid element to populate
+	directorAndDuration.appendChild(directorElement);
+	directorAndDuration.appendChild(durationElement);
+}
+
+function populateDescription(movie) {
+	// Description
+	const descriptionElement = document.createElement("p");
+	descriptionElement.innerText = movie.description ?? "Pas de description disponible.";
+	// Adding it to the grid element to populate
+	let description = document.querySelector(".infoWindow__details__leftBlock");
+	description.appendChild(descriptionElement);
+}
+
+function populateActors(movie) {
 	// Actors
 	const actorElement = document.createElement("p");
 	let actorStr = "";
@@ -93,42 +145,11 @@ function generateInfoWindowVrai(movie) {
 	}
 	actorStr = actorStr.slice(0,-3)
 	actorElement.innerText = actorStr;
-	// Duration
-	const durationElement = document.createElement("p");
-	durationElement.innerText = movie.duration + " minutes" ?? "Durée inconnue.";
-	
-	// Box office results
-	const boxofficeElement = document.createElement("p");
-	boxofficeElement.innerText = movie.worldwide_gross_income + "$"  ?? "Résultats au box office inconnus.";
-	// Description
-	const descriptionElement = document.createElement("p");
-	descriptionElement.innerText = movie.description ?? "Pas de description disponible.";
-	// Adding all elements to the window
-	// infoWindow.appendChild(title)
-	infoWindow.appendChild(imageElement);
-	infoWindow.appendChild(gridTitleElement);
-	// infoWindow.appendChild(genreElement);
-	// infoWindow.appendChild(yearElement);
-	infoWindow.appendChild(ratedElement);
-	infoWindow.appendChild(scoreElement);
-	infoWindow.appendChild(directorElement);
-	infoWindow.appendChild(actorElement);
-	infoWindow.appendChild(durationElement)
-	// infoWindow.appendChild(countryElement);
-	infoWindow.appendChild(boxofficeElement);
-	infoWindow.appendChild(descriptionElement);
-	// Adding the window to the page
-	overlay.appendChild(infoWindow);
-	// Event listener to close the overlay
-	overlay.addEventListener("click", function(event) {
-		var overlay = document.querySelector(".overlay");
-		overlay.innerHTML = "";
-		overlay.style.display = "none";
-	})
-
-	// document.body.classList.remove("stop-scrolling");
-	
+	// Adding it to the grid element to populate
+	let actors = document.querySelector(".infoWindow__details__rightBlock");
+	actors.appendChild(actorElement);
 }
+
 
 // async function recupererSuperFilms() {
 // 	//Récupération des pièces eventuellement stockées dans le localStorage
