@@ -9,26 +9,36 @@ function addListenerShowDetails(element) {
 }
 
 function generateInfoWindow(movie) {
+	// Displaying the overlay
+	var overlay = document.querySelector(".overlay");
+	overlay.style.display = "block";
+	// Event listener to close the overlay
+	overlay.addEventListener("click", function(event) {
+		var overlay = document.querySelector(".overlay");
+		// overlay.innerHTML = "";
+		overlay.style.display = "none";
+	})
+}
+
+function generateInfoWindowVrai(movie) {
 	console.log(movie)
 	// Displaying the overlay
 	var overlay = document.querySelector(".overlay");
 	overlay.style.display = "block";
 	// Creating the Window itself
 	var infoWindow = document.createElement("div");
-	infoWindow.classList.add("infoWindow");
-	infoWindow.classList.add("container");
+	infoWindow.className = "infoWindow";
+	// Creation of title, release date, genres, country, and placing them in a grid element
+	var gridTitleElement = document.createElement("div");
+	gridTitleElement.className = ("infoWindow__title")
 	// Title of the movie
-	var title = document.createElement("h2");
+	var title = document.createElement("h3");
 	if (movie.original_title){
 		title.innerText = movie.original_title;
 	}
 	else {
 		title.innerText = movie.title;
 	}
-	
-	// Image
-	const imageElement = document.createElement("img");
-	imageElement.src = movie.image_url;
 	// Genre
 	const genreElement = document.createElement("p");
 	let genreStr = "";
@@ -40,6 +50,27 @@ function generateInfoWindow(movie) {
 	// Release Year
 	const yearElement = document.createElement("p");
 	yearElement.innerText = movie.year ?? "Date de sortie inconnue.";
+	// Country
+	const countryElement = document.createElement("p");
+	let countryStr = "";
+	for (let country of movie.countries){
+		countryStr += country + " / ";
+	}
+	countryStr = countryStr.slice(0,-3)
+	countryElement.innerText = countryStr;
+	// Adding all four element to the grid element
+	gridTitleElement.appendChild(title);
+	gridTitleElement.appendChild(yearElement);
+	gridTitleElement.appendChild(genreElement);
+	gridTitleElement.appendChild(countryElement);
+
+
+	
+	// Image
+	const imageElement = document.createElement("img");
+	imageElement.src = movie.image_url;
+	imageElement.className = "infoWindow__img"
+	
 	// Rated
 	const ratedElement = document.createElement("p");
 	ratedElement.innerText = movie.rated ?? "Rated non disponible.";
@@ -65,14 +96,7 @@ function generateInfoWindow(movie) {
 	// Duration
 	const durationElement = document.createElement("p");
 	durationElement.innerText = movie.duration + " minutes" ?? "Durée inconnue.";
-	// Country
-	const countryElement = document.createElement("p");
-	let countryStr = "";
-	for (let country of movie.countries){
-		countryStr += country + " / ";
-	}
-	countryStr = countryStr.slice(0,-3)
-	countryElement.innerText = countryStr;
+	
 	// Box office results
 	const boxofficeElement = document.createElement("p");
 	boxofficeElement.innerText = movie.worldwide_gross_income + "$"  ?? "Résultats au box office inconnus.";
@@ -80,18 +104,19 @@ function generateInfoWindow(movie) {
 	const descriptionElement = document.createElement("p");
 	descriptionElement.innerText = movie.description ?? "Pas de description disponible.";
 	// Adding all elements to the window
-	infoWindow.appendChild(title)
-	infoWindow.appendChild(imageElement)
-	infoWindow.appendChild(genreElement)
-	infoWindow.appendChild(yearElement)
-	infoWindow.appendChild(ratedElement)
-	infoWindow.appendChild(scoreElement)
-	infoWindow.appendChild(directorElement)
-	infoWindow.appendChild(actorElement)
+	// infoWindow.appendChild(title)
+	infoWindow.appendChild(imageElement);
+	infoWindow.appendChild(gridTitleElement);
+	// infoWindow.appendChild(genreElement);
+	// infoWindow.appendChild(yearElement);
+	infoWindow.appendChild(ratedElement);
+	infoWindow.appendChild(scoreElement);
+	infoWindow.appendChild(directorElement);
+	infoWindow.appendChild(actorElement);
 	infoWindow.appendChild(durationElement)
-	infoWindow.appendChild(countryElement)
-	infoWindow.appendChild(boxofficeElement)
-	infoWindow.appendChild(descriptionElement)
+	// infoWindow.appendChild(countryElement);
+	infoWindow.appendChild(boxofficeElement);
+	infoWindow.appendChild(descriptionElement);
 	// Adding the window to the page
 	overlay.appendChild(infoWindow);
 	// Event listener to close the overlay
@@ -242,7 +267,6 @@ var mesBtn = document.querySelectorAll(".scrollBtn");
 for (let btn of mesBtn){
 	btn.addEventListener("click", function(event) {
 		let btnName = this.id;
-		console.log(btnName);
 		let genre = btnName.split("__")[0];
 		let direction = btnName.split("__")[2].split("_")[0];
 		var scrollArea = document.querySelector("#" + genre + "__caroussel__scroll");
