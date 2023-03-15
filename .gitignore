@@ -3,3 +3,5 @@ OCMovies-API-EN-FR/
 .idea/
 sass/
 Pipfile
+package.json
+public/css/style.css.map
