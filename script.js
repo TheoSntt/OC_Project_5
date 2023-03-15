@@ -234,3 +234,27 @@ recupererSuperFilms()
 recupererSuperFilms("Action")
 recupererSuperFilms("Comedy")
 recupererSuperFilms("Sci-Fi")
+
+
+// Tente un truc
+var btnOuf = document.querySelector("#Waow");
+btnOuf.addEventListener("click", function(event) {
+	var scrollArea = document.querySelector("#allez");
+	console.log(scrollArea.scrollLeft);
+	scrollArea.scroll({
+		top: 0,
+		left: scrollArea.scrollLeft + 400,
+		behavior: 'smooth'
+	});
+})
+
+var btnOuf2 = document.querySelector("#Waow2");
+btnOuf2.addEventListener("click", function(event) {
+	var scrollArea = document.querySelector("#allez");
+	console.log(scrollArea.scrollLeft);
+	scrollArea.scroll({
+		top: 0,
+		left: scrollArea.scrollLeft - 400,
+		behavior: 'smooth'
+	});
+})

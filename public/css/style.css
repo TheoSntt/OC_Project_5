@@ -39,10 +39,10 @@ button {
 }
 
 .btn {
-  padding: 1.5rem;
   border: 0.1rem solid #15DEA5;
   color: #15DEA5;
   background: #001534;
+  max-height: 80px;
   cursor: pointer;
 }
 .btn:hover {
@@ -56,12 +56,18 @@ button {
 
 .container {
   margin: 6rem;
-  padding: 1.5rem 1.5rem 0 1.5rem;
-  border: 0.1rem solid #D6FFF5;
+}
+
+.navcontainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .subcontainer {
-  overflow-x: auto;
+  overflow-x: hidden;
+  width: 70%;
+  border: 0.1rem solid #D6FFF5;
 }
 
 .caroussel {
@@ -142,6 +148,10 @@ button {
   left: 5%;
   border-radius: 15px;
   background-color: #001534;
+}
+
+h2 {
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */
