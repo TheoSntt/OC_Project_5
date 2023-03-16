@@ -122,12 +122,19 @@ button {
 }
 .frontPageMovie__rightBlock__line1 {
   width: 100%;
+  height: 30%;
 }
 .frontPageMovie__rightBlock__line2 {
   width: 100%;
+  height: 30%;
+}
+.frontPageMovie__rightBlock__line2__btn {
+  margin-top: 2rem;
+  margin-left: 40%;
 }
 .frontPageMovie__rightBlock__line3 {
   width: 100%;
+  height: 40%;
 }
 
 .navcontainer {

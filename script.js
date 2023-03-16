@@ -213,6 +213,7 @@ function createFrontPageMovie(movie) {
 	imageElement.src = movie.image_url;
 	imageElement.className = "frontPageMovie__leftBlock__img"
 	const seeMoreButton = document.createElement("button");
+	seeMoreButton.className = "frontPageMovie__rightBlock__line2__btn"
 	seeMoreButton.dataset.id = movie.id;
 	seeMoreButton.textContent = "Plus d'infos";
 	addListenerShowDetails(seeMoreButton)
