@@ -27,6 +27,7 @@ function removeOverlayAndModal() {
 }
 
 function populateModalWindow(movie) {
+	console.log(movie);
 	// Image
 	let imageElement = document.createElement("img");
 	imageElement.src = movie.image_url;
@@ -77,7 +78,7 @@ function populateGenreAndCountry(movie) {
 		genreStr += genre + " / ";
 	}
 	genreStr = genreStr.slice(0,-3)
-	genreElement.innerText = genreStr;
+	genreElement.innerText = "Genre : " + genreStr;
 	// Adding it to the grid element to populate
 	genreAndCountry.appendChild(genreElement);
 	// Creating the release year element
@@ -87,7 +88,7 @@ function populateGenreAndCountry(movie) {
 		countryStr += country + " / ";
 	}
 	countryStr = countryStr.slice(0,-3)
-	countryElement.innerText = countryStr;
+	countryElement.innerText = "Pays : " + countryStr;
 	// Adding it to the grid element to populate
 	genreAndCountry.appendChild(countryElement);
 }
@@ -96,13 +97,30 @@ function populateScoresAndBoxoffice(movie) {
 	let scoresandBoxoffice = document.querySelector(".infoWindow__informations__line1");
 	// Rated
 	const ratedElement = document.createElement("p");
-	ratedElement.innerText = movie.rated ?? "Rated non disponible.";
+	if (movie.rated == null || movie.rated === "Not rated or unkown rating"){
+		ratedElement.innerText = "Rated non disponible.";
+	}
+	else {
+		ratedElement.innerText = movie.rated + "/20";
+	}
+	
 	// IMDB Score
 	const scoreElement = document.createElement("p");
-	scoreElement.innerText = movie.imdb_score ?? "Score ImDB inconnu.";
+	if (movie.imdb_score == null){
+		scoreElement.innerText = "Score ImDB inconnu.";
+	}
+	else {
+		scoreElement.innerText = movie.imdb_score + "/10";
+	}
+	
 	// Box office results
 	const boxofficeElement = document.createElement("p");
-	boxofficeElement.innerText = movie.worldwide_gross_income + "$"  ?? "Résultats au box office inconnus.";
+	if (movie.worldwide_gross_income == null){
+		boxofficeElement.innerText = "Résultats au box office inconnus."
+	}
+	else {
+		boxofficeElement.innerText = movie.worldwide_gross_income.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " $";
+	}
 	// Adding all three to the grid element to populate
 	scoresandBoxoffice.appendChild(ratedElement);
 	scoresandBoxoffice.appendChild(scoreElement);
@@ -118,7 +136,7 @@ function populateDirectorAndDuration(movie) {
 		directorStr += director + " / ";
 	}
 	directorStr = directorStr.slice(0,-3)
-	directorElement.innerText = directorStr;
+	directorElement.innerText = "Réalisateur : " + directorStr;
 	// Duration
 	const durationElement = document.createElement("p");
 	durationElement.innerText = movie.duration + " minutes" ?? "Durée inconnue.";
