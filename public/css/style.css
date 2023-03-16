@@ -8,12 +8,12 @@
 
 body {
   box-sizing: border-box;
-  background: #001534;
+  background: #f2f2f2;
 }
 
 body {
   font-family: "Arial", sans-serif;
-  color: #15DEA5;
+  color: #333333;
   font-size: 2rem;
   font-weight: 100;
   line-height: 1.7;
@@ -24,6 +24,13 @@ h1 {
   font-weight: 900;
   font-size: 5rem;
   font-style: italic;
+}
+
+h2 {
+  font-family: "Arial", sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 textarea {
@@ -46,15 +53,15 @@ button {
 }
 
 .btn {
-  border: 0.1rem solid #15DEA5;
-  color: #15DEA5;
-  background: #001534;
+  border: 0.1rem solid #c4c4c4;
+  color: #c4c4c4;
+  background: #f2f2f2;
   max-height: 80px;
   cursor: pointer;
 }
 .btn:hover {
-  background: #15DEA5;
-  color: #D6FFF5;
+  background: #c4c4c4;
+  color: #333333;
 }
 .btn--full-width {
   width: 100%;
@@ -74,7 +81,7 @@ button {
 .subcontainer {
   overflow-x: hidden;
   width: 70%;
-  border: 0.1rem solid #D6FFF5;
+  border: 0.1rem solid #333333;
 }
 
 .caroussel {
@@ -94,7 +101,7 @@ button {
 }
 
 .header {
-  background: #15DEA5;
+  background: #c4c4c4;
   height: 10rem;
   display: flex;
   align-items: center;
@@ -112,22 +119,15 @@ button {
 }
 .nav__link {
   display: inline;
-  font-size: 3rem;
+  font-size: 2rem;
   padding-left: 1.5rem;
 }
 .nav__link a {
   text-decoration: none;
-  color: #D6FFF5;
-}
-.nav__link--active {
-  color: #001534;
-}
-.nav__link--active:hover {
-  cursor: default;
-  color: #001534;
+  color: #333333;
 }
 .nav__link a:hover {
-  color: #fff;
+  color: #f2f2f2;
 }
 
 .overlay {
@@ -147,13 +147,13 @@ button {
   height: 90%;
   width: 90%;
   padding: 1.5rem 1.5rem 0 1.5rem;
-  border: 0.1rem solid #D6FFF5;
+  border: 0.1rem solid #333333;
   margin: auto;
   position: absolute;
   top: 5%;
   left: 5%;
   border-radius: 15px;
-  background-color: #001534;
+  background-color: #f2f2f2;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
@@ -164,7 +164,7 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: 0.1rem solid #D6FFF5;
+  border: 0.1rem solid #333333;
 }
 .infoWindow__title {
   grid-column: 2/5;
@@ -201,7 +201,7 @@ button {
   height: 90%;
   width: 49%;
   float: left;
-  border: 0.1rem solid #D6FFF5;
+  border: 0.1rem solid #333333;
   border-radius: 15px;
   padding: 0.8rem;
   margin-top: 2%;
@@ -213,17 +213,13 @@ button {
   height: 90%;
   width: 49%;
   float: right;
-  border: 0.1rem solid #D6FFF5;
+  border: 0.1rem solid #333333;
   border-radius: 15px;
   padding: 0.8rem;
   margin-top: 2%;
   overflow: auto;
   font-size: 24px;
   text-align: justify;
-}
-
-h2 {
-  text-align: center;
 }
 
 :root {
