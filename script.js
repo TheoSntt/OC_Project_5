@@ -4,7 +4,7 @@ function addListenerShowDetails(element) {
 		const id = event.target.dataset.id;
 		const reponse = await fetch("http://localhost:8000/api/v1/titles/" + id);
 		const filmInfo = await reponse.json();
-		displayOverlayAndModal(filmInfo)
+		displayOverlayAndModal(filmInfo);
 	});
 }
 
@@ -147,7 +147,7 @@ function populateDirectorAndDuration(movie) {
 function populateDescription(movie) {
 	// Description
 	const descriptionElement = document.createElement("p");
-	descriptionElement.innerText = movie.description ?? "Pas de description disponible.";
+	descriptionElement.innerText = movie.long_description ?? "Pas de description disponible.";
 	// Adding it to the grid element to populate
 	let description = document.querySelector(".infoWindow__details__leftBlock");
 	description.appendChild(descriptionElement);
@@ -188,29 +188,40 @@ function populateActors(movie) {
 // 	}
 // }
 
-function createFrontPageMovie(movie) {
-	var section = document.querySelector("#frontPageMovie");
+async function fetchMovieDescription(movie) {
+	const reponse = await fetch("http://localhost:8000/api/v1/titles/" + movie.id);
+	const filmInfo = await reponse.json();
+	const sectionDescr = document.querySelector(".frontPageMovie__rightBlock__line3");
+	const descrElement = document.createElement("p");
+	console.log(filmInfo);
+	descrElement.innerText = filmInfo.long_description ?? "Pas de description disponible.";
+	sectionDescr.appendChild(descrElement);
+}
 
-	const filmElement = document.createElement("div");
-	filmElement.className = "highlightMovie";
+function createFrontPageMovie(movie) {
+	fetchMovieDescription(movie);
+	var sectionImg = document.querySelector(".frontPageMovie__leftBlock");
+	var sectionTitle = document.querySelector(".frontPageMovie__rightBlock__line1");
+	var sectionBtn = document.querySelector(".frontPageMovie__rightBlock__line2");
+	var sectionDescr = document.querySelector(".frontPageMovie__rightBlock__line3");
+	// const filmElement = document.createElement("div");
+	// filmElement.className = "highlightMovie";
 	// filmElement.dataset.id = movie.id;
-	const nomElement = document.createElement("h2");
+	const nomElement = document.createElement("h1");
 	nomElement.innerText = movie.title;
-	const noteElement = document.createElement("p");
-	noteElement.innerText = movie.imdb_score ?? "(Pas de note IMDB)";
 	const imageElement = document.createElement("img");
 	imageElement.src = movie.image_url;
+	imageElement.className = "frontPageMovie__leftBlock__img"
 	const seeMoreButton = document.createElement("button");
 	seeMoreButton.dataset.id = movie.id;
-	seeMoreButton.textContent = "Afficher les informations";
+	seeMoreButton.textContent = "Plus d'infos";
 	addListenerShowDetails(seeMoreButton)
+
 	// On rattache la balise film a la section
-	
-	section.appendChild(filmElement);
-	filmElement.appendChild(nomElement);
-	filmElement.appendChild(noteElement);
-	filmElement.appendChild(imageElement);
-	filmElement.appendChild(seeMoreButton);
+	sectionImg.appendChild(imageElement);
+	sectionTitle.appendChild(nomElement);
+	sectionBtn.appendChild(seeMoreButton);
+
 }
 
 async function recupererSuperFilms(genre=null) {

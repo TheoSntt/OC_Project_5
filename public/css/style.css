@@ -24,6 +24,7 @@ h1 {
   font-weight: 900;
   font-size: 5rem;
   font-style: italic;
+  text-align: center;
 }
 
 h2 {
@@ -94,6 +95,39 @@ button {
 
 .container {
   margin: 6rem;
+}
+
+.frontPageMovie {
+  height: 25rem;
+  margin-left: 0;
+  margin-right: 0;
+  background-color: #c4c4c4;
+}
+.frontPageMovie__leftBlock {
+  padding-left: 2rem;
+  height: 100%;
+  width: 30%;
+  float: left;
+}
+.frontPageMovie__leftBlock__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.frontPageMovie__rightBlock {
+  height: 100%;
+  width: 70%;
+  float: right;
+  padding-left: 2rem;
+}
+.frontPageMovie__rightBlock__line1 {
+  width: 100%;
+}
+.frontPageMovie__rightBlock__line2 {
+  width: 100%;
+}
+.frontPageMovie__rightBlock__line3 {
+  width: 100%;
 }
 
 .navcontainer {
