@@ -27,7 +27,6 @@ function removeOverlayAndModal() {
 }
 
 function populateModalWindow(movie) {
-	console.log(movie);
 	// Image
 	let imageElement = document.createElement("img");
 	imageElement.src = movie.image_url;
@@ -110,7 +109,7 @@ function populateScoresAndBoxoffice(movie) {
 		scoreElement.innerText = "Score ImDB inconnu.";
 	}
 	else {
-		scoreElement.innerText = movie.imdb_score + "/10";
+		scoreElement.innerHTML = '<div class="Stars tooltip" style="--rating: '+ movie.imdb_score/2 + ';" aria-label="Rating of this product is 2.3 out of 5."><span class="tooltiptext">Score ImDB : ' + movie.imdb_score + '/10</span></div>';
 	}
 	
 	// Box office results
@@ -326,3 +325,26 @@ for (let btn of mesBtn){
 
 	})
 }
+
+
+// function star(rate) {
+// 	var starHTML = '';
+// 	var intPart = Math.floor(rate);
+// 	var decimalPart = rate - intPart;
+	
+// 	var increment = 0;
+// 	var max = 5; // maximum rating
+
+// 	while(increment < intPart) {
+// 		starHTML += '<i class="material-icons orange">grade</i>';
+// 		increment++;
+// 	}
+// 	starHTML += '<i class="material-icons" style="color: linear-gradient(90deg, orange 60%, grey 60%);">grade</i>';
+// 	max--;
+
+// 	while(max > intPart) {
+// 		starHTML += '<i class="material-icons gray">grade</i>';
+// 		max--;
+// 	}
+// 	return starHTML;
+// }

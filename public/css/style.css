@@ -1,3 +1,4 @@
+@charset "UTF-8";
 *,
 *::before {
   margin: 0;
@@ -29,6 +30,12 @@ textarea {
   font-family: "Arial", sans-serif;
   font-weight: 100;
   font-size: 2rem;
+}
+
+.tooltiptext {
+  font-family: "Arial", sans-serif;
+  font-weight: 100;
+  font-size: 1rem;
 }
 
 button {
@@ -220,6 +227,45 @@ button {
 
 h2 {
   text-align: center;
+}
+
+:root {
+  --star-size: 35px;
+  --star-color: #fff;
+  --star-background: #fc0;
+}
+
+.Stars {
+  --percent: calc(var(--rating) / 5 * 100%);
+  display: inline-block;
+  font-size: var(--star-size);
+  font-family: Times;
+  line-height: 1;
+}
+.Stars::before {
+  content: "★★★★★";
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  width: 200px;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 
 /*# sourceMappingURL=style.css.map */
