@@ -168,9 +168,12 @@ button {
 }
 .infoWindow__title__line1, .infoWindow__title__line2 {
   height: 50%;
-  width: 100%;
+  margin-left: 5%;
+  width: 95%;
   display: flex;
   flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
 }
 .infoWindow__informations {
   grid-column: 2/5;
@@ -178,31 +181,41 @@ button {
 }
 .infoWindow__informations__line1, .infoWindow__informations__line2 {
   height: 50%;
-  width: 100%;
+  margin-left: 5%;
+  width: 95%;
   display: flex;
   flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
 }
 .infoWindow__details {
   grid-column: 1/5;
   grid-row: 3/5;
+  justify-content: space-between;
 }
 .infoWindow__details__leftBlock {
   height: 90%;
-  width: 50%;
+  width: 49%;
   float: left;
   border: 0.1rem solid #D6FFF5;
+  border-radius: 15px;
+  padding: 0.8rem;
   margin-top: 2%;
   overflow: auto;
   font-size: 24px;
+  text-align: justify;
 }
 .infoWindow__details__rightBlock {
   height: 90%;
-  width: 50%;
+  width: 49%;
   float: right;
   border: 0.1rem solid #D6FFF5;
+  border-radius: 15px;
+  padding: 0.8rem;
   margin-top: 2%;
   overflow: auto;
   font-size: 24px;
+  text-align: justify;
 }
 
 h2 {

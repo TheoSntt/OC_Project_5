@@ -51,7 +51,7 @@ function populateTitleAndDate(movie) {
 	// Populating the first line with title and Date
 	let titleAndDate = document.querySelector(".infoWindow__title__line1");
 	// Creating the title element
-	let titleElement = document.createElement("h3");
+	let titleElement = document.createElement("h2");
 	if (movie.original_title){
 		titleElement.innerText = movie.original_title;
 	}
