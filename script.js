@@ -301,7 +301,7 @@ recupererSuperFilms("Sci-Fi")
 
 
 // Add listener to left and right scroll buttons for caroussels
-var mesBtn = document.querySelectorAll(".scrollBtn");
+var mesBtn = document.querySelectorAll(".btn");
 for (let btn of mesBtn){
 	btn.addEventListener("click", function(event) {
 		let btnName = this.id;

@@ -53,19 +53,43 @@ button {
 }
 
 .btn {
-  border: 0.1rem solid #c4c4c4;
-  color: #c4c4c4;
-  background: #f2f2f2;
-  max-height: 80px;
+  background: transparent;
+  border: none !important;
   cursor: pointer;
 }
 .btn:hover {
-  background: #c4c4c4;
-  color: #333333;
+  filter: invert(16%) sepia(4%) saturate(213%) hue-rotate(316deg) brightness(95%) contrast(87%);
 }
-.btn--full-width {
-  width: 100%;
-  margin: 0 auto;
+.btn img {
+  max-height: 8rem;
+}
+
+.arrow {
+  cursor: pointer;
+  display: inline-block;
+  height: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+  position: relative;
+  line-height: 2.5em;
+  padding-left: 1em;
+  padding-right: 2em;
+  background: white;
+  color: black;
+}
+.arrow:after {
+  border-left: 20px solid white;
+}
+
+.arrow:after {
+  content: "";
+  position: absolute;
+  border-bottom: 20px solid transparent;
+  border-top: 20px solid transparent;
+  height: 0px;
+  width: 0px;
+  margin-right: -20px;
+  right: 0;
 }
 
 .container {
