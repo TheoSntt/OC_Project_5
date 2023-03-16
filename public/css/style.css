@@ -102,10 +102,7 @@ button {
   width: 100%;
 }
 .header__logo {
-  font-size: 7rem;
-  color: #001534;
-  margin-left: 10rem;
-  text-shadow: 0.55rem 0.55rem #fff;
+  height: 150px;
 }
 
 .nav {
