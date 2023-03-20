@@ -115,7 +115,7 @@ function populateScoresAndBoxoffice(movie) {
 	// Box office results
 	const boxofficeElement = document.createElement("p");
 	if (movie.worldwide_gross_income == null){
-		boxofficeElement.innerText = "Résultats au box office inconnus."
+		//pass
 	}
 	else {
 		boxofficeElement.innerText = movie.worldwide_gross_income.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " $";
@@ -123,7 +123,10 @@ function populateScoresAndBoxoffice(movie) {
 	// Adding all three to the grid element to populate
 	scoresandBoxoffice.appendChild(ratedElement);
 	scoresandBoxoffice.appendChild(scoreElement);
-	scoresandBoxoffice.appendChild(boxofficeElement);
+	if (movie.worldwide_gross_income !== null){
+		scoresandBoxoffice.appendChild(boxofficeElement);
+	}
+	
 }
 
 function populateDirectorAndDuration(movie) {
