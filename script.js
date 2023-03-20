@@ -1,12 +1,14 @@
-function addListenerShowDetails(element) {
-	element.addEventListener("click", async function (event) {
+import { getMovieDetails, fetchMovieDescription, getBestRatedMovies} from "./jsmodules/api_requests.js";
 
-		const id = event.target.dataset.id;
-		const reponse = await fetch("http://localhost:8000/api/v1/titles/" + id);
-		const filmInfo = await reponse.json();
-		displayOverlayAndModal(filmInfo);
-	});
-}
+// function addListenerShowDetails(element) {
+// 	element.addEventListener("click", async function (event) {
+
+// 		const id = event.target.dataset.id;
+// 		const reponse = await fetch("http://localhost:8000/api/v1/titles/" + id);
+// 		const filmInfo = await reponse.json();
+// 		displayOverlayAndModal(filmInfo);
+// 	});
+// }
 
 function displayOverlayAndModal(movie) {
 	//Calling the function to populate the modal window with the movie information
@@ -171,37 +173,6 @@ function populateActors(movie) {
 	actors.appendChild(actorElement);
 }
 
-
-// async function recupererSuperFilms() {
-// 	//Récupération des pièces eventuellement stockées dans le localStorage
-// 	let topFilms = window.localStorage.getItem("topFilms");
-
-// 	if (topFilms === null) {
-// 		// Récupération des pièces depuis l'API
-// 		const reponse = await fetch("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score");
-// 		topFilms = await reponse.json();
-// 		// Transformation des pièces en JSON
-// 		const valeurFilms = JSON.stringify(topFilms);
-// 		// Stockage des informations dans le localStorage
-// 		window.localStorage.setItem("topFilms", valeurFilms);
-// 	} else {
-// 		topFilms = JSON.parse(topFilms);
-// 	}
-// 	for (let film of topFilms.results){
-// 		console.log(film.title)
-// 	}
-// }
-
-async function fetchMovieDescription(movie) {
-	const reponse = await fetch("http://localhost:8000/api/v1/titles/" + movie.id);
-	const filmInfo = await reponse.json();
-	const sectionDescr = document.querySelector(".frontPageMovie__rightBlock__line3");
-	const descrElement = document.createElement("p");
-	console.log(filmInfo);
-	descrElement.innerText = filmInfo.long_description ?? "Pas de description disponible.";
-	sectionDescr.appendChild(descrElement);
-}
-
 function createFrontPageMovie(movie) {
 	fetchMovieDescription(movie);
 	var sectionImg = document.querySelector(".frontPageMovie__leftBlock");
@@ -220,7 +191,12 @@ function createFrontPageMovie(movie) {
 	seeMoreButton.className = "frontPageMovie__rightBlock__line2__btn"
 	seeMoreButton.dataset.id = movie.id;
 	seeMoreButton.textContent = "Plus d'infos";
-	addListenerShowDetails(seeMoreButton)
+	// addListenerShowDetails(seeMoreButton)
+	seeMoreButton.addEventListener("click", function(event){
+		getMovieDetails(event).then(function(movieData){
+			displayOverlayAndModal(movieData);
+		})
+	});
 
 	// On rattache la balise film a la section
 	sectionImg.appendChild(imageElement);
@@ -229,38 +205,38 @@ function createFrontPageMovie(movie) {
 
 }
 
-async function recupererSuperFilms(genre=null) {
+// async function recupererSuperFilms(genre=null) {
 
-	if (genre === null){
-		var url = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score"
-	}
-	else {
-		var url = "http://localhost:8000/api/v1/titles/?genre=" + genre + "&sort_by=-imdb_score"
-	}
+// 	if (genre === null){
+// 		var url = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score"
+// 	}
+// 	else {
+// 		var url = "http://localhost:8000/api/v1/titles/?genre=" + genre + "&sort_by=-imdb_score"
+// 	}
 	
 
-	// Sending request to get the 5 best rated films (API only returns 5 items ...)
-	let reponse = await fetch(url);
-	let topFilms = await reponse.json();
-	let sevenBestFilms = topFilms.results
-	// Sending request to get page 2 of results
-	reponse = await fetch(topFilms.next);
-	topFilms = await reponse.json();
-	if (genre === null){
-		for (let i = 0; i < 3; i++){
-			sevenBestFilms.push(topFilms.results[i])
-		}
-		createFrontPageMovie(sevenBestFilms.shift())
-	}
-	else {
-		for (let i = 0; i < 2; i++){
-			sevenBestFilms.push(topFilms.results[i])
-		}
-	}
+// 	// Sending request to get the 5 best rated films (API only returns 5 items ...)
+// 	let reponse = await fetch(url);
+// 	let topFilms = await reponse.json();
+// 	let sevenBestFilms = topFilms.results
+// 	// Sending request to get page 2 of results
+// 	reponse = await fetch(topFilms.next);
+// 	topFilms = await reponse.json();
+// 	if (genre === null){
+// 		for (let i = 0; i < 3; i++){
+// 			sevenBestFilms.push(topFilms.results[i])
+// 		}
+// 		createFrontPageMovie(sevenBestFilms.shift())
+// 	}
+// 	else {
+// 		for (let i = 0; i < 2; i++){
+// 			sevenBestFilms.push(topFilms.results[i])
+// 		}
+// 	}
 
-	console.log(sevenBestFilms.length)
-	createSection(sevenBestFilms, genre)
-}
+// 	console.log(sevenBestFilms.length)
+// 	createSection(sevenBestFilms, genre)
+// }
 
 function createSection(filmList, genre){
 
@@ -289,7 +265,12 @@ function createSection(filmList, genre){
 		// imageElement.className = "item-image";
 		imageElement.src = film.image_url;
 		imageElement.dataset.id = film.id;
-		addListenerShowDetails(imageElement)
+		// addListenerShowDetails(imageElement)
+		imageElement.addEventListener("click", function(event){
+			getMovieDetails(event).then(function(movieData){
+				displayOverlayAndModal(movieData);
+			})
+		});
 		
 		
 		// On rattache la balise film a la section
@@ -309,10 +290,19 @@ function createSection(filmList, genre){
 // boutonCool.addEventListener("click", recupererSuperFilms);
 
 // Appel de fonctions au chargement de la page
-recupererSuperFilms()
-recupererSuperFilms("Action")
-recupererSuperFilms("Comedy")
-recupererSuperFilms("Sci-Fi")
+getBestRatedMovies().then(function(data){
+	createFrontPageMovie(data.shift());
+	createSection(data, "Best");
+});
+getBestRatedMovies("Action").then(function(data){
+	createSection(data, "Action");
+});
+getBestRatedMovies("Comedy").then(function(data){
+	createSection(data, "Comedy");
+});
+getBestRatedMovies("Sci-Fi").then(function(data){
+	createSection(data, "Sci-Fi");
+});
 
 
 
