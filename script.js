@@ -15,14 +15,15 @@ function displayOverlayAndModal(movie) {
 	let overlay = document.querySelector(".overlay");
 	overlay.style.display = "block";
 	// Event listener to close the overlay
-	overlay.addEventListener("click", removeOverlayAndModal)
+	let btnClose = document.querySelector(".infoWindow__closebtndiv__btn");
+	btnClose.addEventListener("click", removeOverlayAndModal);
 }
 
 function removeOverlayAndModal() {
 	let overlay = document.querySelector(".overlay");
 	let window = document.querySelector(".infoWindow");
 	//TODO : change to empty all containers within the window and not the window itself
-	window.innerHTML = "<div class='infoWindow__title'><div class='infoWindow__title__line1'></div><div class='infoWindow__title__line2'></div></div><div class='infoWindow__informations'><div class='infoWindow__informations__line1'></div><div class='infoWindow__informations__line2'></div></div><div class='infoWindow__details'><div class='infoWindow__details__leftBlock'></div><div class='infoWindow__details__rightBlock'></div></div>";
+	window.innerHTML = "<div class='infoWindow__closebtndiv'><button class='infoWindow__closebtndiv__btn'>+</button></div><div class='infoWindow__title'><div class='infoWindow__title__line1'></div><div class='infoWindow__title__line2'></div></div><div class='infoWindow__informations'><div class='infoWindow__informations__line1'></div><div class='infoWindow__informations__line2'></div></div><div class='infoWindow__details'><div class='infoWindow__details__leftBlock'></div><div class='infoWindow__details__rightBlock'></div></div>";
 	overlay.style.display = "none";
 }
 
