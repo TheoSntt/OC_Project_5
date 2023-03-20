@@ -109,7 +109,7 @@ function populateScoresAndBoxoffice(movie) {
 		scoreElement.innerText = "Score ImDB inconnu.";
 	}
 	else {
-		scoreElement.innerHTML = '<div class="Stars tooltip" style="--rating: '+ movie.imdb_score/2 + ';" aria-label="Rating of this product is 2.3 out of 5."><span class="tooltiptext">Score ImDB : ' + movie.imdb_score + '/10</span></div>';
+		scoreElement.innerHTML = '<div class="Stars tooltip" style="--rating: '+ movie.imdb_score/2 + ';"><span class="tooltiptext">Score ImDB : ' + movie.imdb_score + '/10</span></div>';
 	}
 	
 	// Box office results
