@@ -4,7 +4,7 @@ function addListenerShowDetails(element) {
 		const id = event.target.dataset.id;
 		const reponse = await fetch("http://localhost:8000/api/v1/titles/" + id);
 		const filmInfo = await reponse.json();
-		displayOverlayAndModal(filmInfo)
+		displayOverlayAndModal(filmInfo);
 	});
 }
 
@@ -27,7 +27,6 @@ function removeOverlayAndModal() {
 }
 
 function populateModalWindow(movie) {
-	console.log(movie);
 	// Image
 	let imageElement = document.createElement("img");
 	imageElement.src = movie.image_url;
@@ -110,13 +109,13 @@ function populateScoresAndBoxoffice(movie) {
 		scoreElement.innerText = "Score ImDB inconnu.";
 	}
 	else {
-		scoreElement.innerText = movie.imdb_score + "/10";
+		scoreElement.innerHTML = '<div class="Stars tooltip" style="--rating: '+ movie.imdb_score/2 + ';"><span class="tooltiptext">Score ImDB : ' + movie.imdb_score + '/10</span></div>';
 	}
 	
 	// Box office results
 	const boxofficeElement = document.createElement("p");
 	if (movie.worldwide_gross_income == null){
-		boxofficeElement.innerText = "Résultats au box office inconnus."
+		//pass
 	}
 	else {
 		boxofficeElement.innerText = movie.worldwide_gross_income.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " $";
@@ -124,7 +123,10 @@ function populateScoresAndBoxoffice(movie) {
 	// Adding all three to the grid element to populate
 	scoresandBoxoffice.appendChild(ratedElement);
 	scoresandBoxoffice.appendChild(scoreElement);
-	scoresandBoxoffice.appendChild(boxofficeElement);
+	if (movie.worldwide_gross_income !== null){
+		scoresandBoxoffice.appendChild(boxofficeElement);
+	}
+	
 }
 
 function populateDirectorAndDuration(movie) {
@@ -148,7 +150,7 @@ function populateDirectorAndDuration(movie) {
 function populateDescription(movie) {
 	// Description
 	const descriptionElement = document.createElement("p");
-	descriptionElement.innerText = movie.description ?? "Pas de description disponible.";
+	descriptionElement.innerText = movie.long_description ?? "Pas de description disponible.";
 	// Adding it to the grid element to populate
 	let description = document.querySelector(".infoWindow__details__leftBlock");
 	description.appendChild(descriptionElement);
@@ -189,29 +191,41 @@ function populateActors(movie) {
 // 	}
 // }
 
-function createFrontPageMovie(movie) {
-	var section = document.querySelector("#frontPageMovie");
+async function fetchMovieDescription(movie) {
+	const reponse = await fetch("http://localhost:8000/api/v1/titles/" + movie.id);
+	const filmInfo = await reponse.json();
+	const sectionDescr = document.querySelector(".frontPageMovie__rightBlock__line3");
+	const descrElement = document.createElement("p");
+	console.log(filmInfo);
+	descrElement.innerText = filmInfo.long_description ?? "Pas de description disponible.";
+	sectionDescr.appendChild(descrElement);
+}
 
-	const filmElement = document.createElement("div");
-	filmElement.className = "highlightMovie";
+function createFrontPageMovie(movie) {
+	fetchMovieDescription(movie);
+	var sectionImg = document.querySelector(".frontPageMovie__leftBlock");
+	var sectionTitle = document.querySelector(".frontPageMovie__rightBlock__line1");
+	var sectionBtn = document.querySelector(".frontPageMovie__rightBlock__line2");
+	var sectionDescr = document.querySelector(".frontPageMovie__rightBlock__line3");
+	// const filmElement = document.createElement("div");
+	// filmElement.className = "highlightMovie";
 	// filmElement.dataset.id = movie.id;
-	const nomElement = document.createElement("h2");
+	const nomElement = document.createElement("h1");
 	nomElement.innerText = movie.title;
-	const noteElement = document.createElement("p");
-	noteElement.innerText = movie.imdb_score ?? "(Pas de note IMDB)";
 	const imageElement = document.createElement("img");
 	imageElement.src = movie.image_url;
+	imageElement.className = "frontPageMovie__leftBlock__img"
 	const seeMoreButton = document.createElement("button");
+	seeMoreButton.className = "frontPageMovie__rightBlock__line2__btn"
 	seeMoreButton.dataset.id = movie.id;
-	seeMoreButton.textContent = "Afficher les informations";
+	seeMoreButton.textContent = "Plus d'infos";
 	addListenerShowDetails(seeMoreButton)
+
 	// On rattache la balise film a la section
-	
-	section.appendChild(filmElement);
-	filmElement.appendChild(nomElement);
-	filmElement.appendChild(noteElement);
-	filmElement.appendChild(imageElement);
-	filmElement.appendChild(seeMoreButton);
+	sectionImg.appendChild(imageElement);
+	sectionTitle.appendChild(nomElement);
+	sectionBtn.appendChild(seeMoreButton);
+
 }
 
 async function recupererSuperFilms(genre=null) {
@@ -302,7 +316,7 @@ recupererSuperFilms("Sci-Fi")
 
 
 // Add listener to left and right scroll buttons for caroussels
-var mesBtn = document.querySelectorAll(".scrollBtn");
+var mesBtn = document.querySelectorAll(".btn");
 for (let btn of mesBtn){
 	btn.addEventListener("click", function(event) {
 		let btnName = this.id;
@@ -326,3 +340,26 @@ for (let btn of mesBtn){
 
 	})
 }
+
+
+// function star(rate) {
+// 	var starHTML = '';
+// 	var intPart = Math.floor(rate);
+// 	var decimalPart = rate - intPart;
+	
+// 	var increment = 0;
+// 	var max = 5; // maximum rating
+
+// 	while(increment < intPart) {
+// 		starHTML += '<i class="material-icons orange">grade</i>';
+// 		increment++;
+// 	}
+// 	starHTML += '<i class="material-icons" style="color: linear-gradient(90deg, orange 60%, grey 60%);">grade</i>';
+// 	max--;
+
+// 	while(max > intPart) {
+// 		starHTML += '<i class="material-icons gray">grade</i>';
+// 		max--;
+// 	}
+// 	return starHTML;
+// }
