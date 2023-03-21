@@ -12,7 +12,6 @@ export async function getMovieDetails(event) {
 	const id = event.target.dataset.id;
 	const reponse = await fetch("http://localhost:8000/api/v1/titles/" + id);
 	const filmInfo = await reponse.json();
-	console.log(filmInfo);
 	return filmInfo
 
 }
@@ -22,7 +21,6 @@ export async function fetchMovieDescription(movie) {
 	const filmInfo = await reponse.json();
 	const sectionDescr = document.querySelector(".frontPageMovie__rightBlock__line3");
 	const descrElement = document.createElement("p");
-	console.log(filmInfo);
 	descrElement.innerText = filmInfo.long_description ?? "Pas de description disponible.";
 	sectionDescr.appendChild(descrElement);
 }
