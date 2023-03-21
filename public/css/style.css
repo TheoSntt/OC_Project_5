@@ -68,7 +68,7 @@ button {
 
 .btn {
   background: transparent;
-  border: none !important;
+  border: none;
   filter: invert(66%) sepia(79%) saturate(446%) hue-rotate(107deg) brightness(91%) contrast(98%);
   cursor: pointer;
 }
@@ -106,7 +106,7 @@ button {
 .Stars {
   --percent: calc(var(--rating) / 5 * 100%);
   display: inline-block;
-  font-size: var(35px);
+  font-size: 35px;
   font-family: Times;
   line-height: 2;
 }
@@ -114,8 +114,8 @@ button {
   content: "★★★★★";
   letter-spacing: 3px;
   background: linear-gradient(90deg, #fc0 var(--percent), #fff var(--percent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .tooltip .tooltiptext {
@@ -250,8 +250,8 @@ button {
   position: relative;
 }
 .infoWindow__closebtndiv__btn {
-  background-color: transparent;
-  border-color: transparent;
+  background: transparent;
+  border: none;
   color: #15DEA5;
   font-style: normal;
   font-weight: 400;
