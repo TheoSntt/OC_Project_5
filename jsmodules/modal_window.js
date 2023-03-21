@@ -1,5 +1,6 @@
+// From a movie's information (from the API) passed as arg, this function displays the information within the modal window
 export function populateModalWindow(movie) {
-	// Image
+	// Create the image element
 	let imageElement = document.createElement("img");
 	imageElement.src = movie.image_url;
 	imageElement.className = "infoWindow__img";
@@ -19,6 +20,7 @@ export function populateModalWindow(movie) {
 	populateActors(movie);
 }
 
+// Handle the creation of the title and the year of release elements
 function populateTitleAndDate(movie) {
 	// Populating the first line with title and Date
 	let titleAndDate = document.querySelector(".infoWindow__title__line1");
@@ -39,6 +41,7 @@ function populateTitleAndDate(movie) {
 	titleAndDate.appendChild(yearElement);
 }
 
+// Handle the creation of the genre and the country of origin elements
 function populateGenreAndCountry(movie) {
 	// Populating the first line with title and Date
 	let genreAndCountry = document.querySelector(".infoWindow__title__line2");
@@ -64,6 +67,7 @@ function populateGenreAndCountry(movie) {
 	genreAndCountry.appendChild(countryElement);
 }
 
+// Handle the creation of the Rated, IMDB score and box office results elements
 function populateScoresAndBoxoffice(movie) {
 	let scoresandBoxoffice = document.querySelector(".infoWindow__informations__line1");
 	// Rated
@@ -101,6 +105,7 @@ function populateScoresAndBoxoffice(movie) {
 	
 }
 
+// Handle the creation of the Director and movie duration elements
 function populateDirectorAndDuration(movie) {
 	let directorAndDuration = document.querySelector(".infoWindow__informations__line2");
 	// Director(s)
@@ -119,6 +124,7 @@ function populateDirectorAndDuration(movie) {
 	directorAndDuration.appendChild(durationElement);
 }
 
+// Handle the creation of the description element
 function populateDescription(movie) {
 	// Description
 	const descriptionElement = document.createElement("p");
@@ -128,6 +134,7 @@ function populateDescription(movie) {
 	description.appendChild(descriptionElement);
 }
 
+// Handle the creation of the actors element
 function populateActors(movie) {
 	// Actors
 	const actorElement = document.createElement("p");
