@@ -4,7 +4,12 @@ import {populateModalWindow} from "./modal_window.js";
 // From a movie's information (from the API) passed as arg, this function create the "front page movie" section of the page
 export function createFrontPageMovie(movie) {
 	// Send a request to the API to retrieve the movie description and add it to the corresponding div
-	fetchMovieDescription(movie);
+	fetchMovieDescription(movie).then(function(movieData){
+		let sectionDescr = document.querySelector(".frontPageMovie__rightBlock__line3");
+		let descrElement = document.createElement("p");
+		descrElement.innerText = movieData.long_description ?? "Pas de description disponible.";
+		sectionDescr.appendChild(descrElement);
+	});
 	// Retrieving all the container div from the HTML
 	let sectionImg = document.querySelector(".frontPageMovie__leftBlock");
 	let sectionTitle = document.querySelector(".frontPageMovie__rightBlock__line1");

@@ -42,8 +42,5 @@ export async function getBestRatedMovies(genre=null) {
 export async function fetchMovieDescription(movie) {
 	let reponse = await fetch("http://localhost:8000/api/v1/titles/" + movie.id);
 	let filmInfo = await reponse.json();
-	let sectionDescr = document.querySelector(".frontPageMovie__rightBlock__line3");
-	let descrElement = document.createElement("p");
-	descrElement.innerText = filmInfo.long_description ?? "Pas de description disponible.";
-	sectionDescr.appendChild(descrElement);
+	return filmInfo
 }
