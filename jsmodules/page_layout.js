@@ -20,7 +20,8 @@ export function createFrontPageMovie(movie) {
 	// Creating img div
 	let imageElement = document.createElement("img");
 	imageElement.src = movie.image_url;
-	imageElement.className = "frontPageMovie__leftBlock__img"
+	imageElement.className = "frontPageMovie__leftBlock__img";
+	imageElement.alt = "Affiche du film " + movie.title;
 	// Creating the button
 	let seeMoreButton = document.createElement("button");
 	seeMoreButton.className = "frontPageMovie__rightBlock__line2__btn"
@@ -63,6 +64,7 @@ export function createSection(filmList, genre){
 		let imageElement = document.createElement("img");
 		imageElement.src = film.image_url;
 		imageElement.dataset.id = film.id;
+		imageElement.alt = "Affiche du film " + film.title;
 		// Adds the click event listener on the image : opens the modal window for the movie
 		imageElement.addEventListener("click", function(event){
 			getMovieDetails(event).then(function(movieData){
