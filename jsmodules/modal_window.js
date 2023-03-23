@@ -76,7 +76,7 @@ function populateScoresAndBoxoffice(movie) {
 		ratedElement.innerText = "Rated non disponible.";
 	}
 	else {
-		ratedElement.innerText = movie.rated + "/20";
+		ratedElement.innerText = "Rated : " + movie.rated;
 	}
 	
 	// IMDB Score
