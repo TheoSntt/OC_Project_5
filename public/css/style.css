@@ -118,6 +118,10 @@ button {
   color: transparent;
 }
 
+.tooltip {
+  position: relative;
+}
+
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
@@ -130,6 +134,7 @@ button {
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
+  right: 105%;
 }
 
 .tooltip:hover .tooltiptext {
