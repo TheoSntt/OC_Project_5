@@ -5,3 +5,4 @@ sass/
 Pipfile
 package.json
 public/css/style.css.map
+public/css/style.css

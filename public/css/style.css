@@ -101,6 +101,7 @@ button {
   display: inline;
   margin-left: 1rem;
   margin-right: 1rem;
+  cursor: pointer;
 }
 
 .Stars {
