@@ -1,11 +1,12 @@
 
-# SITE WEB DE STREAMING DE FILMS
+# Just Stream it
 
 
-## Avertissements
+## Description du projet
 
 Cette application Web a pour but d'afficher les films proposés par l'API d'OpenClassrooms sous forme de suggestions basées sur un certains nombres de critères comme le type de film, la popularité, ou la note Imdb.
-Il s'agit d'un projet réalisé dans le cadre de la formation Développeur Python d'Openclassrooms et n'a pas vocation à être utilisée dans un autre contexte. 
+Il s'agit d'un projet réalisé dans le cadre de la formation Développeur Python d'Openclassrooms. 
+Ce projet avait pour but de nous familiariser avec les langages du Web et l'intéraction avec une API REST.
 
 ## Mise en place et exécution de l'application
 
