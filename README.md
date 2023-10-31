@@ -6,7 +6,7 @@
 
 Cette application Web a pour but d'afficher les films proposés par l'API d'OpenClassrooms sous forme de suggestions basées sur un certains nombres de critères comme le type de film, la popularité, ou la note Imdb.
 Il s'agit d'un projet réalisé dans le cadre de la formation Développeur Python d'Openclassrooms. 
-Ce projet avait pour but de nous familiariser avec les langages du Web et l'intéraction avec une API REST.
+Ce projet avait pour but de familiariser les étudiants avec les langages du Web et l'intéraction avec une API REST. Etant déjà familier avec ces concepts, ce projet a surtout été pour moi l'occasion de prendre en main Sass pour la gestion du style du projet.
 
 ## Mise en place et exécution de l'application
 
